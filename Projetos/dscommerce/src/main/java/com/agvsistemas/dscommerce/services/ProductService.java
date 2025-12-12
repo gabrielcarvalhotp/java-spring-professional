@@ -26,4 +26,16 @@ public class ProductService {
         }
         return new ProductDTO(entity.get());
     }
+
+    public ProductDTO create(ProductDTO dto) {
+        var entity = new Product();
+        entity.setName(dto.name());
+        entity.setDescription(dto.description());
+        entity.setPrice(dto.price());
+        entity.setImgUrl(dto.imgUrl());
+
+        entity = productRepository.save(entity);
+
+        return new ProductDTO(entity);
+    }
 }
