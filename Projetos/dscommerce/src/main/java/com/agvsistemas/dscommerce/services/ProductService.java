@@ -26,7 +26,7 @@ public class ProductService {
     public ProductDTO findById(Long id) {
         var entity = productRepository.findById(id);
         if (entity.isEmpty()) {
-            throw new ResourceNotFoundException("Product #" + id.toString() + " not found!");
+            throw new ResourceNotFoundException("Product #" + id + " not found!");
         }
         return new ProductDTO(entity.get());
     }
@@ -45,6 +45,11 @@ public class ProductService {
         copyDtoToEntity(dto, entity);
         entity = productRepository.save(entity);
         return new ProductDTO(entity);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        productRepository.deleteById(id);
     }
 
     public void copyDtoToEntity(ProductDTO dto, Product entity) {
