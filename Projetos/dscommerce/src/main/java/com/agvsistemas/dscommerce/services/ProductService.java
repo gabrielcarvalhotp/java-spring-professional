@@ -20,8 +20,8 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findALl(Pageable pageable) {
-        var entityList = productRepository.findAll(pageable);
+    public Page<ProductDTO> findALl(String name, Pageable pageable) {
+        var entityList = productRepository.searchByName(name, pageable);
         return entityList.map(ProductDTO::new);
     }
 

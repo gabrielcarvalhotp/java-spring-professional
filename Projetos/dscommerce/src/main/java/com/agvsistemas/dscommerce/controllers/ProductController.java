@@ -18,8 +18,11 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
-        var products = productService.findALl(pageable);
+    public ResponseEntity<Page<ProductDTO>> findAll(
+            @RequestParam(name = "name", defaultValue = "") String name,
+            Pageable pageable
+    ) {
+        var products = productService.findALl(name, pageable);
         return ResponseEntity.ok(products);
     }
 
